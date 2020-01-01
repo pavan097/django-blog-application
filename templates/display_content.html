@@ -1,8 +1,6 @@
-<html>
-    <head>
-        <title> Display Content </title>
-    </head>
-    <body>
-        
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2> {{d.title}} </h2>
+    <p> {{d.content}} </p>
+{% endblock %}

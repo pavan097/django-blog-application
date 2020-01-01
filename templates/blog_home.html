@@ -1,55 +1,19 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <title> Blog Home </title>
-        <style>
-            .topnav {
-                overflow: hidden;
-                background-color: #333;
-            }
+{% extends 'base.html' %}
 
-            .topnav a {
-                float: left;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-size: 17px;
-            }
-
-            .topnav a:hover {
-                background-color: #ddd;
-                color: black;
-            }
-
-            .topnav a.active {
-                background-color: #4CAF50;
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="topnav">
-            <a href=#>Home</a>
-            <a href='/create_blog/'>Create Posts</a>
-        </div>
-        <div>
-            <h3> Blog Posts </h3>
-            <table class="table">
-                {% for i in data %}
-                    <tr>
-                        <td>
-                            <div class="container">
-                                <a href='/display_content/{{i.id}}'><h2> {{i.title}} </h2></a>
-                                <p> {{i.content}} </p>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </body>
-</html>
+{% block content %}
+    <div>
+        <h3> Blog Posts </h3>
+        <table class="table">
+            {% for i in data %}
+                <tr>
+                    <td>
+                        <div class="container">
+                            <a href='/display_content/{{i.id}}'><h2> {{i.title}} </h2></a>
+                            <p> {{i.content}} </p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -20,5 +20,6 @@ def blogHome(request):
     data = BlogContent.objects.all()
     return render(request, 'blog_home.html', {'data':data})
 
-def displayContent(request):
-    return HttpResponse('success')
+def displayContent(request, slug):
+    d = BlogContent.objects.get(id=slug)
+    return render(request, 'display_content.html', {'d':d})
