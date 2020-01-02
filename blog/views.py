@@ -2,7 +2,9 @@ from django.shortcuts import render
 from blog.models import BlogContent
 from django.http import HttpResponse
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def blogData(request):
     if request.method == "POST":
         title = request.POST['title']
@@ -16,6 +18,7 @@ def blogData(request):
         return HttpResponse('Success')
     return render(request, 'content_create.html', {})
 
+@login_required
 def blogHome(request):
     data = BlogContent.objects.all()
     return render(request, 'blog_home.html', {'data':data})
