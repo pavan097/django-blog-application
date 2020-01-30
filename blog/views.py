@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from blog.models import BlogContent
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 
 @login_required
 def blogData(request):
@@ -26,3 +27,10 @@ def blogHome(request):
 def displayContent(request, slug):
     d = BlogContent.objects.get(id=slug)
     return render(request, 'display_content.html', {'d':d})
+
+def getData(request):
+    if request.method == "GET":
+        data = BlogContent.objects.all()
+        data = serializers.serialize('json', data)
+        # return JsonResponse(data, safe=False)
+        return HttpResponse(data, content_type='application/json')

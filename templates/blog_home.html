@@ -3,7 +3,8 @@
 {% block content %}
     <div>
         <h3> Blog Posts </h3>
-        <table class="table">
+        <button id="re"> Refresh </button>
+        <table class="table" id="blog_data">
             {% for i in data %}
                 <tr>
                     <td>
@@ -16,4 +17,30 @@
             {% endfor %}
         </table>
     </div>
+{% endblock %}
+
+{% block jscriptContent %}
+<script>
+    $("#re").click(function(){
+        $.ajax({
+            url: '/getData/',
+            dataType: 'json',
+            success: function(data){
+                // console.log('working',data[0].fields.title);
+                console.log('working',data)
+                var event_data = '';
+                $.each(data, function(index, value){
+                    event_data += '<tr><td><div class="container">';
+                    event_data += '<a href="/display_content/"'+value.pk+'><h2>'+value.fields.title+'</h2></a>';
+                    event_data += '<p>'+value.fields.content+'</p></div></td></tr>';
+                });
+                $('#blog_data').append(event_data);
+
+            },
+            error: function(d){
+                alert("There is an error")
+            }
+        });
+    });
+</script>
 {% endblock %}
